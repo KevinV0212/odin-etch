@@ -24,20 +24,34 @@ function createBoxes(size)
         box.classList.add('grid-box');
         box.style.height = box.style.width = boxHeight + 'px';
     
-        box.addEventListener('mouseover', colorBoxRandom)
+        box.addEventListener('mouseover', colorBoxShade)
         wrapper.appendChild(box);
     }
 }
 function colorBoxRandom(e)
 {
     e.stopPropagation();
-    console.log(e)
     let randomRed = Math.floor(Math.random() * 255) + 1
     let randomGreen = Math.floor(Math.random() * 255) + 1
     let randomBlue = Math.floor(Math.random() * 255) + 1
     e.target.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`
+    console.log(e.target.style.backgroundColor)
+    e.target.classList.add = 'colored';
 }
 
+function colorBoxShade(e)
+{
+    e.stopPropagation();
+    const box = e.target;
+    let colorWeight = .1;
+    if (box.classList.contains('colored')) 
+        colorWeight = +box.style.backgroundColor.slice(-4, -1) + 0.1
+    console.log
+    box.style.backgroundColor = `rgb(0, 0, 0, ${colorWeight})`
+    box.classList.add('colored');
+
+    
+}
 // resize button to create a new grid
 // number of boxes across will come from user input
 resizeButton.addEventListener('click', resizeGrid)
