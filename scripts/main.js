@@ -39,7 +39,9 @@ function resizeGrid(){
     do
     {
         newSize = +prompt('Enter a new grid size');
-    } while(!Number.isInteger(newSize));
+        if (newSize > 100) alert('Size limit is 100 boxes')
+        else if (newSize < 0) alert('Size should be at least 0')
+    } while(!Number.isInteger(newSize) || newSize > 100 || newSize < 0);
     createBoxes(newSize);
     
 }
