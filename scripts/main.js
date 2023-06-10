@@ -14,11 +14,11 @@ container.insertBefore(wrapper, resetButton);
 
 // generates the the boxes that make of the grid
 // box dimensions and height accommodate 'GRID_HEIGHT' and 'gridSize'
-createBoxes();
-function createBoxes()
+createBoxes(gridSize);
+function createBoxes(size)
 {
-    let boxHeight = wrapper.clientWidth / gridSize;
-    for (let boxes = 0; boxes < gridSize ** 2; boxes++)
+    let boxHeight = wrapper.clientWidth / size;
+    for (let boxes = 0; boxes < size ** 2; boxes++)
     {
         let box = document.createElement('div');
         box.classList.add('grid-box');
@@ -35,7 +35,17 @@ function createBoxes()
 resizeButton.addEventListener('click', resizeGrid)
 
 function resizeGrid(){
+    deleteGrid();
+    do
+    {
+        newSize = +prompt('Enter a new grid size');
+    } while(!Number.isInteger(newSize));
+    createBoxes(newSize);
     
+}
+function deleteGrid(){
+    const boxes = document.querySelectorAll('.grid-box');
+    boxes.forEach(box => wrapper.removeChild(box))
 }
 
 // reset button to clear boxes
