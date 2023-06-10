@@ -1,12 +1,18 @@
-const container = document.querySelector('.container');
-// set grid dimension variable
 const GRID_SIZE = 4;
 const GRID_HEIGHT = '400px';
+
+const container = document.querySelector('.container');
+
+const resetButton = document.querySelector('.reset-button');
+resetButton.addEventListener('click', () =>{
+    const boxes = document.querySelectorAll('.grid-box')
+    boxes.forEach(box => box.classList.remove('colored'));
+})
 
 const wrapper = document.createElement('div');
 wrapper.style.height = wrapper.style.width = GRID_HEIGHT;
 wrapper.classList.add('grid-wrapper');
-container.insertBefore(wrapper, document.querySelector('.reset-button'));
+container.insertBefore(wrapper, resetButton);
 
 // calculate the dimensions of each box by using the width of grid wrapper
 let boxHeight = wrapper.clientWidth / GRID_SIZE;
@@ -21,6 +27,7 @@ for (let boxes = 0; boxes < GRID_SIZE ** 2; boxes++)
     box.style.height = box.style.width = boxHeight + 'px';
 
     box.addEventListener('mouseover', () => box.classList.add('colored'))
+    box.addEventListener('click', (e) => e.target.classList.toggle('colored'));
     wrapper.appendChild(box);
 }
 // for each box, add grid-box to classlist
