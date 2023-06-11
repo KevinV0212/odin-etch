@@ -54,22 +54,28 @@ function createBoxes(size)
         box.classList.add('grid-box');
         box.style.height = box.style.width = boxHeight + 'px';
     
-        box.addEventListener('mouseover', () =>{
+        box.addEventListener('mouseover', (e) =>{
             if (drawingMode === 'basic') 
-                colorBoxBasic(box);
+                colorBoxBasic(e.target);
             else if (drawingMode === 'random')
-                colorBoxRandom(box);
+                colorBoxRandom(e.target);
             else if (drawingMode === 'shade')
-                colorBoxShade(box);
+                colorBoxShade(e.target);
         })
+        box.addEventListener('click', removeColor)
         wrapper.appendChild(box);
     }
 }
+
+// colors a box black when drawingMode = basic
 function colorBoxBasic(box)
 {
+    if (box.classList.contains('colored')) return;
     box.style.backgroundColor = `rgb(0, 0, 0)`
     box.classList.add('colored', 'colored-basic');
 }
+
+// randomly colors a box when in drawingMode = random
 function colorBoxRandom(box)
 {
     if (box.classList.contains('colored')) return;
@@ -78,15 +84,28 @@ function colorBoxRandom(box)
     let randomBlue = Math.floor(Math.random() * 255) + 1;
     box.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`
     box.classList.add('colored', 'colored-random');
+
 }
 
+// adds 10 percent black to every box when drawingMode = shade
 function colorBoxShade(box)
 {
     let colorWeight = .1;
+    if(box.classList.contains('colored-basic') || box.classList.contains('colored-random'))
+        return;
     if (box.classList.contains('colored')) 
         colorWeight = +box.style.backgroundColor.slice(-4, -1) + 0.1
     box.style.backgroundColor = `rgb(0, 0, 0, ${colorWeight})`
     box.classList.add('colored', 'colored-shade');
+}
+
+function removeColor(e){
+    const box = e.target;
+    box.style.backgroundColor = '';
+    box.classList.remove('colored-basic');
+    box.classList.remove('colored-random');
+    box.classList.remove('colored-shade');
+    box.classList.remove('colored');
 }
 
 // resize button to create a new grid
@@ -122,3 +141,14 @@ function resetBoxes()
 
 }
 
+gridChangeButtons = [resetButton, resizeButton];
+
+gridChangeButtons.forEach(button => {
+    button.addEventListener('mousedown', (e) =>{
+        e.target.classList.add('btn-active');
+    })
+    button.addEventListener('mouseup', (e) =>{
+        e.target.classList.remove('btn-active');
+    })
+
+})
