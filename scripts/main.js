@@ -9,7 +9,7 @@ let gridSize = 4;
 const wrapper = document.createElement('div');
 wrapper.style.height = wrapper.style.width = GRID_HEIGHT;
 wrapper.classList.add('grid-wrapper');
-container.insertBefore(wrapper, resetButton);
+container.appendChild(wrapper);
 
 // functionality for drawing mode select buttons
 // Basic: pure black; Random: random colors; Shade: adds 10% black every time box is passed

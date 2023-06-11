@@ -9,15 +9,25 @@
     <script src="scripts/main.js" defer></script>
 </head>
 <body>
+    <div class="header">
+        <h1>Etch-a-sketch</h1>
+        <h2>Hover over a square to draw</h2>
+    </div>
     <div class="container">
+        
+        
         <div class="options-bar">
-            <button class="select-basic">Basic</button>
-            <button class="select-random">Random</button>
-            <button class="select-shade">Shade</button>
-            <button class="resize-button">Resize Grid</button>
+            <div class="type-select">
+                <button class="select-basic btn-active">Basic</button>
+                <button class="select-random">Random</button>
+                <button class="select-shade">Shade</button>
+            </div>
+            <div class="grid-change">
+                <button class="reset-button">Reset</button>
+                <button class="resize-button">Resize Grid</button>
+            </div>
         </div>
 
-        <button class="reset-button">Reset</button>
     </div>
 </body>
 </html>

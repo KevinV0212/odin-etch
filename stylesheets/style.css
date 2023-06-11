@@ -1,20 +1,38 @@
+:root{
+    --green-dark: #95bbdd;
+}
+
 *{
     box-sizing:border-box;
     margin: 0;
     padding: 0;
+    background-color: black;
 }
 
 .container{
     width:80%;
-    height:100vh;
+    padding: 30px;
     margin: 0 auto;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
 }
-.grid-wrapper, .grid-box{
+.header{
+    text-align:center;
+    padding: 30px 0;
+
+    background-color:yellow;
+    color:black;
+    
+}
+h1, h2, h3, h4, h5, h6{
+    background:none;
+
+}
+.grid-box{
     border: 1px solid black;
+    background-color:whitesmoke;
     margin:0;
     padding:0;
 }
@@ -23,6 +41,39 @@
     flex-wrap:wrap;
     padding:0;
     margin:0;
+    background-color:whitesmoke;
+    border: 3px solid yellow;
+
+}
+
+.options-bar{
+    width: 800px;
+    display:flex;
+    margin-bottom:30px;
+    display:flex;
+}
+
+.type-select{
+    display:flex;
+    flex: auto;
+    gap: 20px;
+}
+.select-basic, .select-random, .select-shade,.reset-button, .resize-button{
+    padding:10px 20px;
+    border-radius:5px;
+    background-color: yellow;
+}
+.btn-active{
+    background-color:rgb(236, 236, 0);
+    color:black;
+    font-weight:bold;
+    border:4px solid rgb(255, 154, 247);
+}
+.grid-change{
+    display:flex;
+    flex: auto;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .reset-button{
