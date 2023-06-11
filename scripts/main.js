@@ -32,6 +32,16 @@ selectShade.addEventListener('click', (e) => {
     drawingMode = 'shade';
 })
 
+// changing drawing mode button appearances on click
+const selectBar = document.querySelector('.select-bar');
+let selectButtons = [selectBasic, selectRandom, selectShade];
+selectButtons.forEach(button =>{
+    button.addEventListener('click', (e) => {
+        selectButtons.forEach(button => button.classList.remove('btn-active'))
+        e.target.classList.add('btn-active');
+    })
+})
+
 // generates the the boxes that make of the grid
 // box dimensions and height accommodate 'GRID_HEIGHT' and 'gridSize'
 createBoxes(gridSize);
@@ -75,7 +85,6 @@ function colorBoxShade(box)
     let colorWeight = .1;
     if (box.classList.contains('colored')) 
         colorWeight = +box.style.backgroundColor.slice(-4, -1) + 0.1
-    console.log
     box.style.backgroundColor = `rgb(0, 0, 0, ${colorWeight})`
     box.classList.add('colored', 'colored-shade');
 }
@@ -112,3 +121,4 @@ function resetBoxes()
     })
 
 }
+
