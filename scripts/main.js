@@ -55,14 +55,29 @@ function createBoxes(size)
         box.style.height = box.style.width = boxHeight + 'px';
     
         box.addEventListener('mouseover', (e) =>{
-            if (drawingMode === 'basic') 
-                colorBoxBasic(e.target);
-            else if (drawingMode === 'random')
-                colorBoxRandom(e.target);
-            else if (drawingMode === 'shade')
-                colorBoxShade(e.target);
+            if (e.buttons == 1 || e.buttons == 3){
+                if (drawingMode === 'basic') 
+                    colorBoxBasic(e.target);
+                else if (drawingMode === 'random')
+                    colorBoxRandom(e.target);
+                else if (drawingMode === 'shade')
+                    colorBoxShade(e.target);
+            }
         })
-        box.addEventListener('click', removeColor)
+        box.addEventListener('mousedown', (e)=>{
+            if (e.target.classList.contains('colored'))
+                removeColor(e.target);
+            else
+            {
+                if (drawingMode === 'basic') 
+                colorBoxBasic(e.target);
+                else if (drawingMode === 'random')
+                    colorBoxRandom(e.target);
+                else if (drawingMode === 'shade')
+                    colorBoxShade(e.target); 
+            }
+
+        })
         wrapper.appendChild(box);
     }
 }
@@ -99,8 +114,7 @@ function colorBoxShade(box)
     box.classList.add('colored', 'colored-shade');
 }
 
-function removeColor(e){
-    const box = e.target;
+function removeColor(box){
     box.style.backgroundColor = '';
     box.classList.remove('colored-basic');
     box.classList.remove('colored-random');
@@ -131,12 +145,13 @@ function deleteGrid(){
 // reset button to clear boxes
 resetButton.addEventListener('click', resetBoxes)
 
-function resetBoxes()
+function resetBoxes(e)
 {
     const boxes = document.querySelectorAll('.grid-box')
     boxes.forEach(box =>{
         box.style.backgroundColor = 'white';
-        box.classList.remove('colored')
+        removeColor(box);
+        console.log(e)
     })
 
 }
